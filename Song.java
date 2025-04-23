@@ -62,8 +62,10 @@ public class Song {
         title = newTitle;
     }
 
-    public void editAlbum(Album newAlbum) {
-        album = newAlbum ;
+    public void changeAlbum(Album newAlbum) {
+        this.album.getTracklist().remove(this);
+        newAlbum.getTracklist().add(this);
+        this.album = newAlbum;
     }
 
     public void editContent(String newContent) {
@@ -87,9 +89,11 @@ public class Song {
 
         return "\n** Song Page **" +
                 "\ntitle: " + title +
+                "\nAlbum: " + album.getTitle() +
                 "\nTotal views: " + views +
                 "\nRelease date: " + releaseDate +
                 "\nTotal likes: " + likes +
+                "\n-------------------\n" + "Lyrics: \n" + lyrics + "\n-------------------" +
                 "\n" + getComments().size() + " Comments:" +
                 "\n" + commentsStr;
     }

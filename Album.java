@@ -5,12 +5,13 @@ public class Album {
     private String title;
     private Date releaseDate;
     private ArrayList<Song> tracklist; // Tracklist in a specific order.
-    private Artist artist; // Each album belongs to one artist.
+    private ArrayList<Artist> artists; // Each album can belong to multiple artists.
 
-    public Album(String title, Date releaseDate, Artist artist) {
+    public Album(String title, Artist artist) {
         this.title = title;
-        this.releaseDate = releaseDate;
-        this.artist = artist;
+        this.releaseDate = new Date();
+        this.artists = new ArrayList<>();
+        this.artists.add(artist);
         this.tracklist = new ArrayList<>();
     }
 
@@ -22,8 +23,35 @@ public class Album {
         return tracklist;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public ArrayList<Artist> getArtists() {
+        return artists;
+    }
+
+    public void editTitle(String newTitle) {
+        title = newTitle;
+    }
+
+    public void addArtist(Artist artist) {
+        artist.addAlbum(this);
+        artists.add(artist);
+    }
+    public void removeArtist(Artist artist) {
+        artist.removeAlbum(this);
+        artists.remove(artist);
+    }
+
     @Override
     public String toString() {
-        return "Title: " + title + "\nRelease date: " + releaseDate + "\nArtist: " + artist.getName();
+        String artistsStr = "";
+
+        for (Artist artist : artists) {
+            artistsStr += artist.getName() + "\n";
+        }
+
+        return "Title: " + title + "\nRelease date: " + releaseDate + "\nArtist(s): \n" + artistsStr;
     }
 }

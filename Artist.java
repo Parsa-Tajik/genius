@@ -21,6 +21,9 @@ public class Artist extends Account {
     public void addAlbum(Album album) {
         albums.add(album);
     }
+    public void removeAlbum(Album album) {
+        albums.remove(album);
+    }
 
     public void addFollower(Account follower) { followers.add(follower); }
 

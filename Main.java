@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         // initial test values
         Artist artist = new Artist("Metallica", 40, "", "metallica", "metallica");
-        Album album = new Album("Black Album", new Date(), artist);
+        Album album = new Album("Black Album", artist);
         songs.add(new Song("My Friend Of Misery", "They Say The Empty Can Rattles The Most", artist, album));
         songs.add(new Song("Holier Than Thou", "who are you, where ya been, where ya from?", artist, album));
         album.addSong(songs.get(0));
@@ -26,6 +25,8 @@ public class Main {
         artist.addAlbum(album);
         accounts.add(artist);
         accounts.add(artist);
+        albums.add(album);
+        albums.add(album);
 
         // Main loop
         while (true) {
