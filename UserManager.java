@@ -23,10 +23,16 @@ public class UserManager extends Main {
                     showSongs(songs);
                     break;
                 case 2:
-
+                    ArrayList<Artist> artists = new ArrayList<>();
+                    for (Account a : accounts) {
+                        if (a instanceof Artist) {
+                            artists.add((Artist) a);
+                        }
+                    }
+                    showArtists(artists);
                     break;
                 case 3:
-
+                    showArtists(user.getFollowedArtists());
                     break;
                 case 4:
                     Main.logout();
@@ -117,7 +123,50 @@ public class UserManager extends Main {
     }
 
     private static void showArtist(Artist artist) {
+        while (true) {
+            System.out.println("\n** Artist **");
+            System.out.println("Name: " + artist.getName() + " (" + artist.getFollowers().size() + " followers)");
+            System.out.println("[1] view songs");
+            System.out.println("[2] view albums");
+            System.out.println("[3] follow this artist");
+            System.out.println("[4] Exit");
 
+            System.out.print("Enter choice: ");
+            int choice = Main.getIntInput(1, 4);
+
+            switch (choice) {
+                case 1:
+                    showSongs(artist.getSongs());
+                    break;
+                case 2:
+                    showAlbums(artist.getAlbums());
+                    break;
+                case 3:
+                    user.followArtist(artist);
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+
+    private static void showAlbums(ArrayList<Album> albums) {
+        while (true) {
+            System.out.println("\n** All Albums **");
+            for (int i = 0; i < albums.size(); i++) {
+                Album album = albums.get(i);
+                System.out.println("[" + (i + 1) + "] " + album);
+            }
+            System.out.println("[" + (albums.size() + 1) + "] Exit");
+
+            System.out.print("Enter choice: ");
+            int choice = Main.getIntInput(1, albums.size() + 1);
+            if (choice == albums.size() + 1) {
+                break;
+            } else {
+                showAlbum(albums.get(choice - 1));
+            }
+        }
     }
 
     private static void showAlbum(Album album) {

@@ -17,6 +17,9 @@ public class User extends Account {
     public void followArtist(Artist artist) {
         if (!followedArtists.contains(artist)) {
             followedArtists.add(artist);
+            artist.addFollower(this);
+            System.out.println(artist.getName() + " followed successfully...");
+            Main.wait(2000);
         } else {
             System.out.println("Artist already followed");
         }
@@ -25,6 +28,8 @@ public class User extends Account {
         if (!likedSongs.contains(song)) {
             likedSongs.add(song);
             song.addLike();
+            System.out.println("Successfully liked...");
+            Main.wait(2000);
         } else {
             System.out.println("Song already liked");
         }
@@ -32,6 +37,8 @@ public class User extends Account {
     public void addFavoriteSong(Song song) {
         if (!favoriteSongs.contains(song)) {
             favoriteSongs.add(song);
+            System.out.println("Successfully added to favorite songs...");
+            Main.wait(2000);
         } else {
             System.out.println("Song already in your favorite list!");
         }

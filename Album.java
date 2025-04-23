@@ -24,6 +24,6 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nRelease date: " + releaseDate + "\nArtist: " + artist;
+        return "Title: " + title + "\nRelease date: " + releaseDate + "\nArtist: " + artist.getName();
     }
 }

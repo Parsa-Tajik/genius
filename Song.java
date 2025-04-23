@@ -58,6 +58,14 @@ public class Song {
         return artists;
     }
 
+    public void editTitle(String newTitle) {
+        title = newTitle;
+    }
+
+    public void editAlbum(Album newAlbum) {
+        album = newAlbum ;
+    }
+
     public void editContent(String newContent) {
         this.lyrics = newContent;
     }

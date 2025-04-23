@@ -16,16 +16,18 @@ public class Main {
         // initial test values
         Artist artist = new Artist("Metallica", 40, "", "metallica", "metallica");
         Album album = new Album("Black Album", new Date(), artist);
-        songs.add(new Song("My Friend Of Mysery", "They Say The Empty Can Rattles The Most", artist, album));
+        songs.add(new Song("My Friend Of Misery", "They Say The Empty Can Rattles The Most", artist, album));
         songs.add(new Song("Holier Than Thou", "who are you, where ya been, where ya from?", artist, album));
         album.addSong(songs.get(0));
         album.addSong(songs.get(1));
         artist.addSong(songs.get(0));
         artist.addSong(songs.get(1));
+        artist.addAlbum(album);
+        artist.addAlbum(album);
+        accounts.add(artist);
+        accounts.add(artist);
 
-
-
-        // Main loop.
+        // Main loop
         while (true) {
             if (account != null) {
                 if (account instanceof User) {

@@ -37,9 +37,4 @@ public class Artist extends Account {
     public ArrayList<Account> getFollowers() { return followers; }
 
     public ArrayList<EditMessage> getEditMessages() { return editMessages; }
-
-    // Artists can directly edit their lyrics.
-    public void updateSongLyrics(Song song, String newLyrics) {
-        song.editContent(newLyrics);
-    }
 }
