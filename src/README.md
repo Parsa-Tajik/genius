@@ -66,6 +66,7 @@ The application ensures persistence by allowing all data to be saved and reloade
 - Upon registration, users can choose one of two roles:
     - **User**
     - **Artist**
+- To save all changes, manually navigate to Main Menu and choose [Exit] option.
 
 ---
 

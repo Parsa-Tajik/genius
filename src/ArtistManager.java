@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 
 public class ArtistManager extends Main{
