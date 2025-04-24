@@ -12,17 +12,21 @@ public class UserManager extends Main {
             System.out.println("\n** User Menu **");
             System.out.println("Welcome " + u.getName());
             System.out.println("[1] View All Songs");
-            System.out.println("[2] View All Artists");
-            System.out.println("[3] View Followed Artists");
-            System.out.println("[4] Logout");
+            System.out.println("[2] View Favourite Songs");
+            System.out.println("[3] View All Artists");
+            System.out.println("[4] View Followed Artists");
+            System.out.println("[5] Logout");
             System.out.print("Enter choice: ");
-            int choice = Main.getIntInput(1, 4);
+            int choice = Main.getIntInput(1, 5);
 
             switch (choice) {
                 case 1:
                     showSongs(songs);
                     break;
                 case 2:
+                    showSongs(user.getFavoriteSongs());
+                    break;
+                case 3:
                     ArrayList<Artist> artists = new ArrayList<>();
                     for (Account a : accounts) {
                         if (a instanceof Artist) {
@@ -31,10 +35,10 @@ public class UserManager extends Main {
                     }
                     showArtists(artists);
                     break;
-                case 3:
+                case 4:
                     showArtists(user.getFollowedArtists());
                     break;
-                case 4:
+                case 5:
                     Main.logout();
                     return;
             }

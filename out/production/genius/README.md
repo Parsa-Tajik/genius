@@ -4,20 +4,49 @@
 </p>
 A Java-based application inspired by Genius.com, designed for managing song lyrics, artist profiles, and user contributions.   
 
-## Getting Started  
-Refer to the **project documentation** for full details on requirements, implementation guidelines, and evaluation criteria.  
 
-📄 **[Read the full project doc](https://github.com/Advanced-Programming-1403/Nowruz-Project/blob/main/Advanced%20Programming%20-%20Eid%20Project%20Doc.pdf)**  
+## Features
 
-## Setup  
-- Ensure Java and Maven/Gradle are installed  
-- Clone/fork this repository and follow the setup instructions in the documentation  
+### General Features:
+- Users can **register**, **log in**, or **close** the application.
+- Upon registration, users can choose one of two roles:
+    - **User**
+    - **Artist**
 
-## Contribution & Evaluation  
-- Follow OOP principles and clean code practices  
-- Use Git for version control and meaningful commit messages  
+### User Features:
+Once logged in as a **User**, the application provides access to several features:
 
-For additional details, refer to the **documentation**. 🚀  
+#### Main Menu:
+1. **Browse All Songs**: View all available songs in the platform.
+2. **Favorite Songs**: View all songs the user has marked as favorites.
+3. **Browse All Artists**: View all available artists on the platform.
+4. **Followed Artists**: View a list of artists the user is following.
+5. **Logout**: Logout from the current user account.
 
+#### Song Details:
+- Users can select a song from the available list and:
+    - **Like** the song.
+    - **Comment** on the song.
+    - Add the song to the **Favorites** list.
+    - View the **Artists** associated with the song.
+    - Suggest changes to the song's **Lyrics**.
+    - View the **Album** associated with the song.
 
-**good luck and keep on learning!**
+#### Album Details:
+- Users can view all songs in a selected album and choose to play any of them.
+
+#### Artist Details:
+- Users can view all available artists and select one to:
+    - See all songs by the artist.
+    - View the artist’s albums.
+    - **Follow** the artist.
+
+used exeptions
+
+used object stream
+
+used generic methods
+
+save and load process
+
+song

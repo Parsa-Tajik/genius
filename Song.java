@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
 
-public class Song {
+public class Song implements Serializable {
     private String title;
     private String lyrics;
     private ArrayList<Artist> artists;
@@ -16,8 +17,10 @@ public class Song {
         this.lyrics = lyrics;
         this.releaseDate = new Date();
         this.album = album;
+        album.addSong(this);
         this.artists = new ArrayList<>();
         artists.add(artist);
+        artist.addSong(this);
         this.comments = new ArrayList<>();
         this.views = 0;
         this.likes = 0;
@@ -26,7 +29,12 @@ public class Song {
     public void addArtist(Artist artist) {
         if (!artists.contains(artist)) {
             artists.add(artist);
+            artist.addSong(this);
         }
+    }
+    public void removeArtist(Artist artist) {
+        artists.remove(artist);
+        artist.removeSong(this);
     }
 
     public void addComment(Comment comment) {

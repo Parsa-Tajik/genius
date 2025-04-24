@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
 
-public class Album {
+public class Album implements Serializable {
     private String title;
     private Date releaseDate;
     private ArrayList<Song> tracklist; // Tracklist in a specific order.
@@ -12,6 +14,7 @@ public class Album {
         this.releaseDate = new Date();
         this.artists = new ArrayList<>();
         this.artists.add(artist);
+        artist.addAlbum(this);
         this.tracklist = new ArrayList<>();
     }
 

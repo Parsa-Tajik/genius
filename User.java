@@ -41,6 +41,7 @@ public class User extends Account {
             Main.wait(2000);
         } else {
             System.out.println("Song already in your favorite list!");
+            Main.wait(1000);
         }
     }
     public void viewSong(Song song) {
@@ -52,5 +53,8 @@ public class User extends Account {
 
     public ArrayList<Artist> getFollowedArtists() {
         return followedArtists;
+    }
+    public ArrayList<Song> getFavoriteSongs() {
+        return favoriteSongs;
     }
 }

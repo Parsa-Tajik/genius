@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -12,21 +13,23 @@ public class Main {
     protected static Account account = null;
 
     public static void main(String[] args) {
-        // initial test values
-        Artist artist = new Artist("Metallica", 40, "", "metallica", "metallica");
-        Album album = new Album("Black Album", artist);
-        songs.add(new Song("My Friend Of Misery", "They Say The Empty Can Rattles The Most", artist, album));
-        songs.add(new Song("Holier Than Thou", "who are you, where ya been, where ya from?", artist, album));
-        album.addSong(songs.get(0));
-        album.addSong(songs.get(1));
-        artist.addSong(songs.get(0));
-        artist.addSong(songs.get(1));
-        artist.addAlbum(album);
-        artist.addAlbum(album);
-        accounts.add(artist);
-        accounts.add(artist);
-        albums.add(album);
-        albums.add(album);
+        // the following initial data are saved into data files, and they will be loaded once you run the program
+/*
+        accounts.add(new Artist("Metallica", 40, "info@metallica.com", "metallica", "metallica"));
+        Artist artist = (Artist) accounts.get(0);
+
+        albums.add(new Album("Black Album", artist));
+        songs.add(new Song("My Friend Of Misery", "They Say The Empty Can Rattles The Most", artist, albums.get(0)));
+        songs.add(new Song("Holier Than Thou", "who are you, where ya been, where ya from?", artist, albums.get(0)));
+
+        albums.add(new Album("Death Magnetic", artist));
+        songs.add(new Song("That Was Just Your Life", "Like a release from a prison that I didn't know I was in", artist, albums.get(1)));
+        songs.add(new Song("The Day That Never Comes", "I suffer this no longer; I'll put an end to this, I swear", artist, albums.get(1)));
+*/
+
+        loadData(accounts, "accounts");
+        loadData(songs, "songs");
+        loadData(albums, "albums");
 
         // Main loop
         while (true) {
@@ -57,6 +60,10 @@ public class Main {
                 break;
             }
         }
+
+        saveData(accounts, "accounts");
+        saveData(songs, "songs");
+        saveData(albums, "albums");
     }
 
     // Sign-up process: get user information and the role.
@@ -178,4 +185,42 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+
+    private static <T> void loadData(ArrayList<T> list, String fileName) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data/" + fileName + ".dat"))) {
+            ArrayList<T> newList = (ArrayList<T>) ois.readObject();
+            list.clear();
+            list.addAll(newList);
+
+            /*
+            explaining the problem with "list = (ArrayList<T>) ois.readObject();" :
+                you are passing a <copy of reference> of the original list in main. let's say that the address that the original list is pointing to is "a".
+                now the list in the method is also referencing to "a".
+                if you write something like "list.add(s.th);" this would change the original list. actually you are doing this "a.add(s.th)".
+                but if you write "list = (ArrayList<T>) ois.readObject();" you are changing the address that the list in method is referring to, to something like "b".
+                so obviously you did not apply any changes to "a". you are only changing the address of the list in the method to another location in memory.
+                but the original list in main is still pointing to "a".
+            */
+
+        } catch (Exception e) {
+            System.out.println("Error loading data");
+        }
+    }
+
+    private static <T> void saveData(ArrayList<T> list, String filename) {
+        File file = new File("data/" + filename + ".dat");
+        File parentDir = file.getParentFile();
+
+        // to creat data directory if not already existed
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(list);
+        } catch (IOException e) {
+            System.out.println("Error saving data");
+        }
+    }
+
 }

@@ -15,9 +15,10 @@ public class ArtistManager extends Main{
             System.out.println("[3] View Your Albums");
             System.out.println("[4] Add a New Album");
             System.out.println("[5] View Your Followers");
-            System.out.println("[6] Logout");
+            System.out.println("[6] View all edit messages");
+            System.out.println("[7] Logout");
             System.out.print("Enter choice: ");
-            int choice = Main.getIntInput(1, 6);
+            int choice = Main.getIntInput(1, 7);
 
             switch (choice) {
                 case 1:
@@ -46,6 +47,9 @@ public class ArtistManager extends Main{
                     showAllFollowers();
                     break;
                 case 6:
+                    showAllEditMessages();
+                    break;
+                case 7:
                     Main.logout();
                     return;
             }
@@ -77,11 +81,13 @@ public class ArtistManager extends Main{
             System.out.println("[1] Edit title");
             System.out.println("[2] Edit album");
             System.out.println("[3] Update lyrics");
-            System.out.println("[4] Exit");
+            System.out.println("[4] Add an artist");
+            System.out.println("[5] Delete an artist");
+            System.out.println("[6] Exit");
             System.out.print("Enter choice: ");
-            int choice = Main.getIntInput(1, 4);
+            int choice = Main.getIntInput(1, 6);
 
-            switch (choice) {
+            s : switch (choice) {
                 case 1:
                     editSongTitle(song);
                     break;
@@ -91,7 +97,49 @@ public class ArtistManager extends Main{
                 case 3:
                     updateLyrics(song);
                     break;
+
                 case 4:
+                    System.out.println("\nEnter artist's username you wish to add:");
+                    String usernameToAdd = scanner.nextLine();
+                    for (Artist artist : song.getArtists()) {
+                        if (artist.getUsername().equals(usernameToAdd)) {
+                            System.out.println("\nArtist already exists!");
+                            wait(1000);
+                            break s; //gets back to edit album
+                        }
+                    }
+
+                    for (Account acc : accounts) {
+                        if (acc.getUsername().equals(usernameToAdd) && (acc instanceof Artist)) {
+                            song.addArtist((Artist) acc);
+                            System.out.println("\nArtist added successfully...");
+                            wait(2000);
+                            break s;
+                        }
+                    }
+
+                    System.out.println("\nUsername not found!");
+                    wait(1000);
+
+                    break;
+
+                case 5:
+                    System.out.println("\nEnter artist's username you wish to remove:");
+                    String usernameToRemove = scanner.nextLine();
+                    for (Artist artist : song.getArtists()) {
+                        if (artist.getUsername().equals(usernameToRemove)) {
+                            song.removeArtist(artist);
+                            System.out.println("\nArtist removed successfully...");
+                            wait(2000);
+                            break s;
+                        }
+                    }
+
+                    System.out.println("\nUsername not found!");
+                    wait(1000);
+                    break;
+
+                case 6:
                     return;
             }
         }
@@ -260,6 +308,33 @@ public class ArtistManager extends Main{
             }
             System.out.println("[1] Exit");
 
+            System.out.print("Enter choice: ");
+            int choice = Main.getIntInput(1, 1);
+            if (choice == 1) {
+                return;
+            }
+        }
+    }
+
+    private static void showAllEditMessages() {
+
+        if (artist.getEditMessages() == null || artist.getEditMessages().isEmpty()) {
+            System.out.println("\nYou have no messages...");
+            wait(1000);
+            return;
+        }
+
+        while (true) {
+            System.out.println("\n** Edit Message **");
+
+            int i = 1;
+            for (EditMessage message : artist.getEditMessages()) {
+                System.out.println(i + ". " + message);
+                System.out.println();
+                i++;
+            }
+
+            System.out.println("[1] Exit");
             System.out.print("Enter choice: ");
             int choice = Main.getIntInput(1, 1);
             if (choice == 1) {
